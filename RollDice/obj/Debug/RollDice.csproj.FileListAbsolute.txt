@@ -1,0 +1,2 @@
+C:\Users\Florent\source\repos\ProjectUTDice\FlorentTUnitTest\RollDice\obj\Debug\RollDice.csprojAssemblyReference.cache
+C:\Users\Florent\source\repos\ProjectUTDice\FlorentTUnitTest\RollDice\obj\Debug\RollDice.csproj.CoreCompileInputs.cache

@@ -15,62 +15,51 @@ namespace Dice.UnitTests.Services
 
         [TestCase("s")]
         [TestCase(5)]
-        public void AreEntriesInts(int value)
+        public void AreInputsInts(int value)
         {
-            var result = _diceService.VerifyEntries(value);
+            var result = _diceService.VerifyInputs(value);
 
             Assert.IsFalse(result, $"{value} n'est pas un int");
         }
 
-        [Test]
-        public void InitDice()
+        [TestCase(0)]
+        [TestCase(50)]
+        [TestCase(101)]
+        public void IsDiceNumberCorrect()
         {
-            var result = _diceService.VerifyArguments(1);
+            var result = _diceService.VerifyDice(value);
 
-            Assert.IsFalse(result, "1 should not be prime");
+            Assert.IsFalse(result, $"{value} n'est pas un nombre de dés correct, il doit être compris entre 1 et 100");
         }
 
-        [Test]
-        public void InitDice()
+        [TestCase(1)]
+        [TestCase(50)]
+        [TestCase(101)]
+        public void IsFaceNumberCorrect()
         {
-            var result = _diceService.InitDice(1);
+            var result = _diceService.VerifyFaces(value);
 
-            Assert.IsFalse(result, "1 should not be prime");
+            Assert.IsFalse(result, $"{value} n'est pas un nombre de faces correct, il doit être compris entre 2 et 100");
         }
-        [Test]
-        public void InitDice()
-        {
-            var result = _diceService.InitDice(1);
 
-            Assert.IsFalse(result, "1 should not be prime");
+        [TestCase(0)]
+        [TestCase(50)]
+        [TestCase(101)]
+        public void IsModifierNumberCorrect()
+        {
+            var result = _diceService.VerifyModifier(value);
+
+            Assert.IsFalse(result, $"{value} n'est pas un nombre correct pour le modificateur");
         }
-        [Test]
-        public void InitDice()
-        {
-            var result = _diceService.InitDice(1);
 
-            Assert.IsFalse(result, "1 should not be prime");
-        }
-        [Test]
-        public void InitDice()
+        [TestCase("6p3")]
+        [TestCase("54d20(-50)")]
+        [TestCase("60d50+50")]
+        public void IsThrowSyntaxCorrect()
         {
-            var result = _diceService.InitDice(1);
+            var result = _diceService.ThrowErrorUnhandledSyntax(value);
 
-            Assert.IsFalse(result, "1 should not be prime");
-        }
-        [Test]
-        public void InitDice()
-        {
-            var result = _diceService.InitDice(1);
-
-            Assert.IsFalse(result, "1 should not be prime");
-        }
-        [Test]
-        public void InitDice()
-        {
-            var result = _diceService.InitDice(1);
-
-            Assert.IsFalse(result, "1 should not be prime");
+            Assert.IsFalse(result, $"{value} n'est pas la syntaxe correcte pour un lancer de dés");
         }
     }
 }

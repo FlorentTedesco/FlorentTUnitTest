@@ -1,54 +1,69 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace DiceService
 {
     public class DiceService
     {
-        //Vérifier que les entrées soient des int
-        //Vérifier que tous les arguments soient remplis
-        //Vérifier que le nombre de dés est compris entre 1 et 100
-        //Vérifier que le nombre de faces est compris entre 2 et 100
-        //Vérifier que le modificateur par défaut est 0
-        //Vérifier que le modificateur est compris entre -100 et +100
-        //Vérifier que le dés par défaut est 1d6
-        public bool VerifyEntries(string rolls)
+        public bool VerifyInputs(int dice, int face)
         {
-            return true;
-        }
-
-        public bool VerifyArguments(int dice)
-        {
-            return true;
+            if ((int.TryParse(dice, out value)) && (int.TryParse(face, out value)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool VerifyDice(int dice)
         {
-            return true;
+            if ((dice < 1) || (dice > 100))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        public bool VerifyFaces(int dice)
+        public bool VerifyFaces(int face)
         {
-            return true;
+            if ((face < 2) || (face > 100))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        public bool VerifyModifierByDefault(string dice)
+        public bool VerifyModifier(int modifier)
         {
-            return true;
-        }
-
-        public bool VerifyModifier(string dice)
-        {
-            return true;
-        }
-
-        public bool VerifyDiceByDefault()
-        {
-            return true;
+            if ((modifier < 0) || (modifier > 100))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public bool ThrowErrorUnhandledSyntax()
         {
-            return true;
+            Regex rx = new Regex(@"(\d *)(d)(\d *)([\(]([+-]\d *)[\)])");
+            if (rx.Match())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
